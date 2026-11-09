@@ -14,7 +14,7 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from crawler import ats, ba, boards, generic, score
+from crawler import ats, ba, boards, generic, jobspipe, score
 from crawler.common import TODAY, contacts, age_days, load_json, relevant, save_json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -200,6 +200,11 @@ def main():
         collected += [(j, None) for j in bjobs]
         stats["boards"] = bstats
         print(f"boards: {len(bjobs)} listed, {bstats}, {time.time()-t:.0f}s")
+
+    if not a.no_boards:
+        jjobs, jstats = jobspipe.crawl()
+        collected += [(j, None) for j in jjobs]
+        stats.setdefault("boards", {}).update(jstats)
 
     rows = [] if a.only_boards else load_companies()
     if a.only:

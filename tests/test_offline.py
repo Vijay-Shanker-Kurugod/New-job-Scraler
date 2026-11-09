@@ -184,3 +184,16 @@ def test_prescore_and_loose_filter():
     assert "title only" in weak["preFlags"]
     assert C.relevant("Entwicklungsingenieur (m/w/d)", "")                      # short text: kept
     assert not C.relevant("Entwicklungsingenieur Tiefbau (m/w/d)", "Straßenbau " * 100)   # long text, no profile term
+
+
+def test_jobspipe(monkeypatch):
+    import crawler.jobspipe as J
+    monkeypatch.delenv("JOBSPIPE_API_KEY", raising=False)
+    assert J.crawl()[0] == []
+    monkeypatch.setenv("JOBSPIPE_API_KEY", "jp_test")
+    body = {"data": [{"id": 7, "job_title": "Entwicklungsingenieur Leistungselektronik (m/w/d)", "company": "Muster",
+                      "location": "Ulm", "url": "https://de.indeed.com/viewjob?jk=7", "date_posted": T,
+                      "description": DESC}], "metadata": {"credits_remaining": 500}}
+    monkeypatch.setattr(J, "http", lambda *a, **k: R(body))
+    out, st = J.crawl(log=lambda *a: None)
+    assert [j["jobId"] for j in out] == ["jp-7"] and out[0]["source"] == "Indeed (via JobsPipe)"

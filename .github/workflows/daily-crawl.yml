@@ -25,6 +25,8 @@ jobs:
       - name: Install headless Chromium
         run: python -m playwright install --with-deps chromium
       - name: Crawl Arbeitsagentur + job boards + employer career pages
+        env:
+          JOBSPIPE_API_KEY: ${{ secrets.JOBSPIPE_API_KEY }}   # optional: Indeed via JobsPipe, 25 jobs a day
         run: python -u crawl.py --workers 16
       - name: Commit results
         run: |
