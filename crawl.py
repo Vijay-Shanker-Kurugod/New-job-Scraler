@@ -15,7 +15,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from crawler import ats, ba, boards, generic
-from crawler.common import TODAY, age_days, load_json, relevant, save_json
+from crawler.common import TODAY, contacts, age_days, load_json, relevant, save_json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 P = lambda *a: os.path.join(ROOT, *a)
@@ -219,6 +219,8 @@ def main():
                 baseline += 1; continue            # first crawl of this site: just remember
             j["publishedAt"] = today
             j["dateSource"] = "first_seen"
+        if "applyMethod" not in j:
+            j.update(contacts(j.get("jobDescription")))
         new.append(j)
         src = j["source"].split(" (")[0]
         stats["per_source"][src] = stats["per_source"].get(src, 0) + 1

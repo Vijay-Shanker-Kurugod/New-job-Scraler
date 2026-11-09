@@ -161,3 +161,13 @@ def test_rotation_and_db_merge():
     m = by["Beispiel Leistungselektronik GmbH"]
     assert m["sources"] == {"osm", "wikidata"} and m["tier"] == "A" and m["city"] == "Ulm"
     assert by["Musterbäckerei GmbH"]["tier"] == "C" and by["Kanzlei Muster"]["tier"] == "B"
+
+
+def test_contacts():
+    t = ("Ihre Ansprechpartnerin: Frau Anna Becker, Tel. +49 (0) 621 123456-78. Bewerbung bitte an "
+         "karriere@muster-antriebe.de. Datenschutz: datenschutz@muster-antriebe.de")
+    c = C.contacts(t, ["https://www.arbeitsagentur.de/x", "https://muster-antriebe.de/jobs/1"])
+    assert c["applyEmail"] == "karriere@muster-antriebe.de" and c["applyMethod"] == "email"
+    assert c["contactPerson"] == "Frau Anna Becker" and c["applyUrl"] == "https://muster-antriebe.de/jobs/1"
+    assert "621" in c["contactPhone"]
+    assert C.contacts("Bewerben Sie sich online.")["applyMethod"] == "see posting"

@@ -143,6 +143,40 @@ def age_days(date_str):
         return None
 
 
+EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+EMAIL_SKIP = re.compile(r"noreply|no-reply|datenschutz|privacy|dsb@|webmaster|example\.|\.(png|jpg|gif)$", re.I)
+PHONE = re.compile(r"(?:\+49|0049|\b0)[\s/().-]*\d{2,5}[\s/().-]*\d{2,}(?:[\s/.-]*\d{1,})*")
+PERSON = re.compile(r"(?:Ansprechpartner(?:in)?|Kontakt(?:person)?|Ihre? Ansprechperson|contact person|Fragen\w*[^.:]{0,40}?)"
+                    r"\s*[:\-–]?\s*((?:Frau|Herr|Fr\.|Hr\.|Ms\.?|Mr\.?|Dr\.?|Prof\.?)\s+(?:Dr\.\s+)?"
+                    r"[A-ZÄÖÜ][\wäöüß-]+(?:\s+[A-ZÄÖÜ][\wäöüß-]+){0,2})")
+
+
+def contacts(text, urls=()):
+    """How to apply when there is no portal: e-mail addresses, phone, contact person, external apply link.
+    Only what the posting itself publishes; nothing is looked up elsewhere."""
+    text = text or ""
+    emails = []
+    for e in EMAIL.findall(text):
+        e = e.strip(".").lower()
+        if not EMAIL_SKIP.search(e) and e not in emails:
+            emails.append(e)
+    phones = [re.sub(r"\s+", " ", p).strip(" -/") for p in PHONE.findall(text)]
+    phones = [p for p in dict.fromkeys(phones) if sum(c.isdigit() for c in p) >= 8][:2]
+    m = PERSON.search(text)
+    apply_url = next((u for u in urls if u and "arbeitsagentur.de" not in u), "")
+    out = {}
+    if emails:
+        out["applyEmail"] = ", ".join(emails[:3])
+    if phones:
+        out["contactPhone"] = ", ".join(phones)
+    if m:
+        out["contactPerson"] = m.group(1).strip()
+    if apply_url:
+        out["applyUrl"] = apply_url
+    out["applyMethod"] = "email" if emails else ("external link" if apply_url else "see posting")
+    return out
+
+
 def job(*, jid, title, company, location, url, published="", desc="", source, ctype="", extra=None):
     """Record in the same field names score.py/extract.py already use (LinkedIn schema)."""
     d = {

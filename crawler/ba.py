@@ -9,7 +9,7 @@ import base64
 import time
 from urllib.parse import urlparse
 
-from .common import get_json, iso_date, job, relevant, strip_html, title_ok
+from .common import contacts, get_json, iso_date, job, relevant, strip_html, title_ok
 
 BASE = "https://rest.arbeitsagentur.de/jobboerse/jobsuche-service"
 HDR = {"X-API-Key": "jobboerse-jobsuche"}
@@ -99,5 +99,5 @@ def crawl(keywords, days=7, max_pages=5, log=print):
             jid=f"ba-{refnr}", title=title, company=emp, location=loc,
             url=f"https://www.arbeitsagentur.de/jobsuche/suche?id={refnr}",
             published=published, desc=desc, source="Arbeitsagentur", ctype=ctype,
-            extra={"salaryInfo": sal} if sal else None))
+            extra={**({"salaryInfo": sal} if sal else {}), **contacts(desc, _urls(det))}))
     return jobs, employers
