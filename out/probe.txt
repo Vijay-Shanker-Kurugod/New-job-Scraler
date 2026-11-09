@@ -1,0 +1,12 @@
+WD business+DE+website 504 upstream request timeout 65s
+WD DE+website+industry 200 " ]   },   "results" : {     "bindings" : [ {       "n" : {         "datatype" : "http://www.w3.org/2001/XMLSchema#integer",         "type" : "literal",         "value" : "13492"       }     } ]   } } 54s
+OSM 406 <html>
+<head><title>406 Not Acceptable</title></head>
+<body>
+<center><h1>406 Not Acceptable</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+ 1s
+GLEIF head 404
+GLEIF DE total {'currentPage': 1, 'perPage': 1, 'from': 1, 'to': 1, 'total': 259538, 'lastPage': 259538}
