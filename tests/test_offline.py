@@ -171,3 +171,16 @@ def test_contacts():
     assert c["contactPerson"] == "Frau Anna Becker" and c["applyUrl"] == "https://muster-antriebe.de/jobs/1"
     assert "621" in c["contactPhone"]
     assert C.contacts("Bewerben Sie sich online.")["applyMethod"] == "see posting"
+
+
+def test_prescore_and_loose_filter():
+    import crawler.score as S
+    good = S.prescore({"jobTitle": "Junior Entwicklungsingenieur Leistungselektronik (m/w/d)",
+                       "jobDescription": DESC + " Automotive, Master Elektrotechnik, Python, CANoe.", "companyName": "X"})
+    weak = S.prescore({"jobTitle": "Entwicklungsingenieur (m/w/d)", "jobDescription": "", "companyName": "X"})
+    stop = S.prescore({"jobTitle": "Systemingenieur", "jobDescription": "Sicherheitsüberprüfung Ü2 erforderlich",
+                       "companyName": "X"})
+    assert good["preScore"] >= 80 and weak["preScore"] < good["preScore"] and stop["preScore"] == 0
+    assert "title only" in weak["preFlags"]
+    assert C.relevant("Entwicklungsingenieur (m/w/d)", "")                      # short text: kept
+    assert not C.relevant("Entwicklungsingenieur Tiefbau (m/w/d)", "Straßenbau " * 100)   # long text, no profile term

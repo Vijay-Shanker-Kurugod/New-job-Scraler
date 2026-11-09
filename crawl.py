@@ -14,7 +14,7 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from crawler import ats, ba, boards, generic
+from crawler import ats, ba, boards, generic, score
 from crawler.common import TODAY, contacts, age_days, load_json, relevant, save_json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -37,8 +37,13 @@ def load_companies(all_rows=False):
     return rows if all_rows else [r for r in rows if due_today(r)]
 
 
+DEADLINE = [0.0]   # epoch seconds; companies not started by then are left for the next run
+
+
 def crawl_company(row, seen_jobs):
     kind = (row.get("ats") or "").strip()
+    if DEADLINE[0] and time.time() > DEADLINE[0]:
+        return row, [], "skipped: time budget"
     try:
         if kind in ats.ADAPTERS and row.get("ats_id"):
             return row, ats.ADAPTERS[kind](row), None
@@ -133,6 +138,28 @@ def merge_employers(employers):
             w.writerow({k: r.get(k, "") for k in w.fieldnames})
 
 
+def health_check(stats, days=7):
+    """Warn when a source that normally delivers jobs delivers none, or the run ran out of time."""
+    import glob
+    hist = {}
+    files = sorted(glob.glob(P("data", "new", "*.json")) + glob.glob(P("data", "processed", "*.json")))
+    for fpath in files[-days:]:
+        st = load_json(fpath, {}).get("stats") or {}
+        for src, n in (st.get("per_source") or {}).items():
+            hist.setdefault(src, []).append(n)
+    warn = []
+    for src, ns in hist.items():
+        avg = sum(ns) / max(len(ns), 1)
+        if avg >= 3 and stats["per_source"].get(src, 0) == 0:
+            warn.append(f"{src}: 0 new jobs today (7-day average {avg:.0f}) – source may be broken")
+    if stats.get("skipped_time_budget"):
+        warn.append(f"{stats['skipped_time_budget']} career pages skipped for time; they go first next run")
+    errs = len(stats.get("errors") or {})
+    if stats.get("companies") and errs / stats["companies"] > 0.25:
+        warn.append(f"{errs} of {stats['companies']} career pages failed today")
+    return warn
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-age", type=int, default=7)
@@ -142,6 +169,10 @@ def main():
     ap.add_argument("--no-boards", action="store_true")
     ap.add_argument("--only-boards", action="store_true")
     ap.add_argument("--only", help="crawl only companies whose name contains this")
+    ap.add_argument("--budget-min", type=int, default=260,
+                    help="stop starting new career pages after this many minutes (rest goes first next run)")
+    ap.add_argument("--first-crawl-age", type=int, default=30,
+                    help="on a company's first crawl, report dated jobs up to this age instead of --max-age")
     a = ap.parse_args()
     os.makedirs(P("data", "new"), exist_ok=True)
     os.makedirs(P("state"), exist_ok=True)
@@ -152,6 +183,8 @@ def main():
     today = TODAY.isoformat()
     stats = {"date": today, "ba": 0, "companies": 0, "errors": {}, "per_source": {}}
     collected = []
+    started = time.time()
+    DEADLINE[0] = started + a.budget_min * 60
 
     if not a.no_ba:
         t = time.time()
@@ -171,18 +204,26 @@ def main():
     rows = [] if a.only_boards else load_companies()
     if a.only:
         rows = [r for r in rows if a.only.lower() in r["name"].lower()]
+    # tier A first, then companies skipped last time for lack of time, then the rest
+    skipped_before = set(state.get("skipped", []))
+    rows.sort(key=lambda r: ((r.get("tier") or "A") != "A", r["name"] not in skipped_before))
+    skipped_now = []
     empty_generic = []
     with ThreadPoolExecutor(max_workers=a.workers) as ex:
         futs = [ex.submit(crawl_company, r, seen_jobs) for r in rows]
         for f in as_completed(futs):
             row, jobs, err = f.result()
+            if err == "skipped: time budget":
+                skipped_now.append(row["name"]); continue
             stats["companies"] += 1
             if err:
                 stats["errors"][row["name"]] = err
             collected += [(j, row) for j in jobs]
             if not jobs and row.get("careers_url") and (row.get("ats") or "generic") == "generic":
                 empty_generic.append(row)
-    if not a.no_browser and empty_generic:
+    state["skipped"] = skipped_now
+    stats["skipped_time_budget"] = len(skipped_now)
+    if not a.no_browser and empty_generic and time.time() < DEADLINE[0] + 20 * 60:
         t = time.time()
         for row, jobs, err in browser_pass(empty_generic, seen_jobs):
             brow = dict(row, name=row["name"] + "|browser")      # separate baseline for browser-read sites
@@ -208,19 +249,22 @@ def main():
             dupes += 1
             continue
         seen_keys.setdefault(key, src0)
+        first_crawl = row is not None and row["name"] not in seen_cos
         if j["publishedAt"]:
             seen_jobs[jid] = today
-            if (age_days(j["publishedAt"]) or 0) > a.max_age:
+            if (age_days(j["publishedAt"]) or 0) > (a.first_crawl_age if first_crawl else a.max_age):
                 old += 1; continue
             j["dateSource"] = "posted"
         else:
             seen_jobs[jid] = today
-            if row is not None and row["name"] not in seen_cos:
-                baseline += 1; continue            # first crawl of this site: just remember
+            if first_crawl and (row.get("tier") or "A") != "A":
+                baseline += 1; continue            # first crawl of a weekly (tier B) site: just remember
             j["publishedAt"] = today
-            j["dateSource"] = "first_seen"
+            # first crawl of a tier-A site: its open jobs are reported once, flagged, so none are missed
+            j["dateSource"] = "first_crawl" if first_crawl else "first_seen"
         if "applyMethod" not in j:
             j.update(contacts(j.get("jobDescription")))
+        j.update(score.prescore(j))
         new.append(j)
         src = j["source"].split(" (")[0]
         stats["per_source"][src] = stats["per_source"].get(src, 0) + 1
@@ -228,7 +272,9 @@ def main():
         if r["name"] not in stats["errors"]:
             seen_cos.setdefault(r["name"], today)
 
-    stats.update(new=len(new), baseline_recorded=baseline, too_old=old, cross_source_dupes=dupes)
+    new.sort(key=lambda j: -j.get("preScore", 0))
+    stats.update(new=len(new), baseline_recorded=baseline, too_old=old, cross_source_dupes=dupes,
+                 minutes=round((time.time() - started) / 60), health=health_check(stats))
     day_file = P("data", "new", f"{today}.json")
     prev = load_json(day_file, {"items": []})          # a 2nd run on the same day appends
     have = {j["jobId"] for j in prev["items"]}

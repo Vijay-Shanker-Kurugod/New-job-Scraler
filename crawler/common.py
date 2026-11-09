@@ -72,7 +72,11 @@ CORE = X(r"simulink|simscape|stateflow|\bmatlab\b|model[- ]based|modellbasiert|\
          r"e[- ]?drive|electric drive|antriebstechnik|traktion|traction|regelungstechnik|control engineer|"
          r"control system|motor control|\bbms\b|battery|batterie|hochvolt|high[- ]voltage|ladetechnik|"
          r"charging|fahrzeugtechnik|nutzfahrzeug|elektromobil|e-mobility|powertrain|antriebsstrang|"
-         r"elektrotechnik|electrical engineering")
+         r"elektrotechnik|electrical engineering|elektronik|electronics|embedded|mechatron|automatisierung|"
+         r"steuerungstechnik|energietechnik|antriebssystem|elektrifizierung|electrification")
+# Engineering titles that are kept even when the posting text is too short to show a profile term.
+ENG_TITLE = X(r"ingenieur|engineer|entwicklung|entwickler|wissenschaftliche|absolvent|graduate|trainee|"
+              r"berufseinsteiger|junior")
 
 DE_CITIES = ("aachen augsburg bamberg bayreuth berlin bielefeld bochum bonn braunschweig bremen chemnitz "
              "cottbus darmstadt dortmund dresden duisburg düsseldorf duesseldorf erlangen essen esslingen "
@@ -110,7 +114,10 @@ def relevant(title, desc=""):
         return False
     if not TITLE_ROLE.search(title):
         return False
-    return bool(CORE.search(title + " " + (desc or "")))
+    if CORE.search(title + " " + (desc or "")):
+        return True
+    # short or missing text (list pages, truncated ads): keep engineering titles, the pre-score ranks them
+    return len(desc or "") < 400 and bool(ENG_TITLE.search(title))
 
 
 def title_ok(title):
