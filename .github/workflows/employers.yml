@@ -2,12 +2,12 @@ name: grow-employer-list
 
 on:
   schedule:
-    - cron: "0 2 * * 0"        # Sundays 02:00 UTC
+    - cron: "0 23 * * *"       # daily 23:00 UTC: find career pages for new database companies
   workflow_dispatch:
     inputs:
       limit:
         description: "max sites to probe"
-        default: "400"
+        default: "3000"
       research:
         description: "add all German universities + research institutes from Wikidata (yes/no)"
         default: "no"
@@ -25,7 +25,7 @@ concurrency:
 jobs:
   detect:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,7 +36,7 @@ jobs:
         if: ${{ github.event.inputs.research == 'yes' }}
         run: python add_research.py
       - name: Promote Arbeitsagentur employers + detect career systems
-        run: python detect_ats.py --limit "${{ github.event.inputs.limit || '400' }}" ${{ github.event.inputs.recheck_generic == 'yes' && '--recheck-generic --recheck-none' || '' }}
+        run: python detect_ats.py --limit "${{ github.event.inputs.limit || '3000' }}" ${{ github.event.inputs.recheck_generic == 'yes' && '--recheck-generic --recheck-none' || '' }}
       - name: Commit
         run: |
           git config user.name  "job-crawler-bot"

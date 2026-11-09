@@ -144,3 +144,20 @@ def test_beesite(monkeypatch):
     patch(monkeypatch, {"api.mb": R(body)})
     out = A.beesite(ROW(ats_id="https://api.mb/search"))
     assert out and out[0]["jobId"] == "bs-9" and out[0]["publishedAt"] == T
+
+
+def test_rotation_and_db_merge():
+    import crawl, build_db
+    a = {"name": "Acme", "tier": "A"}; b = {"name": "Beta GmbH", "tier": "B"}
+    assert all(crawl.due_today(a, d) for d in range(7))
+    assert sum(crawl.due_today(b, d) for d in range(7)) == 1          # tier B: exactly once a week
+    rows = build_db.merge([
+        [{"name": "Beispiel Leistungselektronik GmbH", "domain": "beispiel.de", "industry": "", "city": "", "sources": {"osm"}}],
+        [{"name": "Beispiel Leistungselektronik", "domain": "www.beispiel.de".removeprefix("www."), "industry": "electrical equipment",
+          "city": "Ulm", "sources": {"wikidata"}}],
+        [{"name": "Musterbäckerei GmbH", "domain": "", "industry": "", "city": "Köln", "lei": "X", "sources": {"gleif"}}],
+        [{"name": "Kanzlei Muster", "domain": "kanzlei-muster.de", "industry": "law firm", "city": "", "sources": {"osm"}}]])
+    by = {r["name"]: r for r in rows}
+    m = by["Beispiel Leistungselektronik GmbH"]
+    assert m["sources"] == {"osm", "wikidata"} and m["tier"] == "A" and m["city"] == "Ulm"
+    assert by["Musterbäckerei GmbH"]["tier"] == "C" and by["Kanzlei Muster"]["tier"] == "B"

@@ -18,7 +18,7 @@ from urllib.parse import urljoin, urlparse
 from crawler.common import http
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-FIELDS = ["name", "domain", "type", "ats", "ats_id", "careers_url", "source", "status", "checked"]
+FIELDS = ["name", "domain", "type", "ats", "ats_id", "careers_url", "source", "status", "checked", "tier"]
 
 PATTERNS = [
     ("greenhouse", re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_board(?:/js)?\?for=)?([A-Za-z0-9_-]+)")),
@@ -140,6 +140,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=400, help="max companies to probe this run")
     ap.add_argument("--recheck-none", action="store_true")
+    ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--recheck-generic", action="store_true",
                     help="re-probe rows marked generic (finds SuccessFactors/Eightfold/d.vinci and better job-list URLs)")
     a = ap.parse_args()
@@ -156,6 +157,7 @@ def main():
                          "source": "Arbeitsagentur", "status": "active", "checked": ""})
             doms.add(d); names.add(e["name"].lower()); added += 1
 
+    rows.sort(key=lambda r: 0 if (r.get("tier") or "A") == "A" else 1)   # relevant companies first (stable)
     todo = [r for r in rows if not r.get("ats") or (a.recheck_none and r["ats"] == "none")
             or (a.recheck_generic and r["ats"] == "generic" and "manual" not in (r.get("source") or ""))][: a.limit]
     print(f"promoted {added} employers from Arbeitsagentur; probing {len(todo)} sites")
@@ -166,7 +168,7 @@ def main():
         except Exception as ex:  # noqa: BLE001
             return r, ("none", "", f"error {type(ex).__name__}")
     from crawler.common import TODAY
-    with ThreadPoolExecutor(max_workers=10) as ex:
+    with ThreadPoolExecutor(max_workers=a.workers) as ex:
         for r, (kind, ident, url) in ex.map(work, todo):
             r["ats"], r["ats_id"] = kind, ident
             if url and not url.startswith("error"):

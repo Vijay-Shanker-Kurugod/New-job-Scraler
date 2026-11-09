@@ -21,9 +21,20 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 P = lambda *a: os.path.join(ROOT, *a)
 
 
-def load_companies():
+def due_today(row, day=None):
+    """Tier A (relevant, hand lists, research) every day; tier B once a week by a stable hash."""
+    if (row.get("tier") or "A") != "B":
+        return True
+    import hashlib
+    day = TODAY.toordinal() if day is None else day
+    return int(hashlib.md5(row["name"].encode()).hexdigest(), 16) % 7 == day % 7
+
+
+def load_companies(all_rows=False):
     with open(P("companies.csv"), encoding="utf-8") as f:
-        return [r for r in csv.DictReader(f) if (r.get("status") or "active") == "active"]
+        rows = [r for r in csv.DictReader(f) if (r.get("status") or "active") == "active"
+                and (r.get("ats") or "") != "none" and (r.get("ats") or r.get("careers_url"))]
+    return rows if all_rows else [r for r in rows if due_today(r)]
 
 
 def crawl_company(row, seen_jobs):

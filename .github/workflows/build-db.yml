@@ -1,0 +1,38 @@
+name: build-company-db
+
+on:
+  schedule:
+    - cron: "0 22 * * 5"       # Fridays 22:00 UTC: refresh the company database from public sources
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: "comma list of wikidata,osm,gleif,ba"
+        default: "wikidata,osm,gleif,ba"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crawl
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.32.3
+      - name: Build data/company_db.csv and add new companies to companies.csv
+        run: python -u build_db.py --sources "${{ github.event.inputs.sources || 'wikidata,osm,gleif,ba' }}"
+      - name: Commit
+        run: |
+          git config user.name  "job-crawler-bot"
+          git config user.email "job-crawler-bot@users.noreply.github.com"
+          git add data/company_db.csv companies.csv
+          git commit -m "company db $(date -u +%F)" || echo "nothing new"
+          git pull --rebase --autostash
+          git push

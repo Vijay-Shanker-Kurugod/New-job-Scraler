@@ -2,7 +2,7 @@ name: daily-crawl
 
 on:
   schedule:
-    - cron: "15 4 * * *"      # 05:15 UTC = 06:15 Berlin (winter) / 07:15 (summer); Claude scan runs 07:47 Berlin
+    - cron: "30 2 * * *"      # 02:30 UTC = 03:30 Berlin (winter); leaves time for the bigger list before the 07:47 Berlin scan
   workflow_dispatch: {}
 
 permissions:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   crawl:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,7 +25,7 @@ jobs:
       - name: Install headless Chromium
         run: python -m playwright install --with-deps chromium
       - name: Crawl Arbeitsagentur + job boards + employer career pages
-        run: python -u crawl.py
+        run: python -u crawl.py --workers 16
       - name: Commit results
         run: |
           git config user.name  "job-crawler-bot"
