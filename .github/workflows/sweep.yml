@@ -1,0 +1,53 @@
+name: full-sweep
+
+on:
+  workflow_dispatch:
+    inputs:
+      find_domains:
+        description: "look up websites for Arbeitsagentur employers first"
+        default: "yes"
+      max_age:
+        description: "only jobs published in the last N days"
+        default: "7"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crawl
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.32.3 playwright==1.48.0
+      - name: Install headless Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Find websites of Arbeitsagentur employers
+        if: ${{ github.event.inputs.find_domains == 'yes' }}
+        run: python find_domains.py --limit 400
+        continue-on-error: true
+      - name: Detect career-page systems for new employers
+        run: python detect_ats.py --limit 800
+        continue-on-error: true
+      - name: Commit employer list
+        run: |
+          git config user.name  "job-crawler-bot"
+          git config user.email "job-crawler-bot@users.noreply.github.com"
+          git add companies.csv data/ba_employers.csv
+          git commit -m "employers for sweep $(date -u +%F)" || echo "no change"
+          git pull --rebase --autostash && git push
+      - name: Sweep every career page + Arbeitsagentur
+        run: python sweep.py --max-age "${{ github.event.inputs.max_age || '7' }}"
+      - name: Commit sweep results
+        if: always()
+        run: |
+          git add data
+          git commit -m "sweep $(date -u +%F)" || echo "nothing"
+          git pull --rebase --autostash && git push

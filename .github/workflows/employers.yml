@@ -1,0 +1,47 @@
+name: grow-employer-list
+
+on:
+  schedule:
+    - cron: "0 2 * * 0"        # Sundays 02:00 UTC
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "max sites to probe"
+        default: "400"
+      research:
+        description: "add all German universities + research institutes from Wikidata (yes/no)"
+        default: "no"
+      recheck_generic:
+        description: "re-probe every 'generic' employer for SuccessFactors/Eightfold/d.vinci and job-list pages (yes/no)"
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crawl
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.32.3
+      - name: Add universities + research institutes (Wikidata)
+        if: ${{ github.event.inputs.research == 'yes' }}
+        run: python add_research.py
+      - name: Promote Arbeitsagentur employers + detect career systems
+        run: python detect_ats.py --limit "${{ github.event.inputs.limit || '400' }}" ${{ github.event.inputs.recheck_generic == 'yes' && '--recheck-generic --recheck-none' || '' }}
+      - name: Commit
+        run: |
+          git config user.name  "job-crawler-bot"
+          git config user.email "job-crawler-bot@users.noreply.github.com"
+          git add companies.csv
+          git commit -m "employers $(date -u +%F)" || echo "no change"
+          git pull --rebase --autostash
+          git push
