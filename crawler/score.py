@@ -2,6 +2,7 @@
 
 It only ranks; the daily scan still reads the top jobs and scores them by hand. Terms are the
 candidate's verified skills (power electronics, e-drives, controls, MBD, MiL/SiL/HiL, CANoe).
+Industries include automotive, aerospace/eVTOL/drones, space, renewables/grid/storage, hydrogen, rail, marine.
 
   technical skills 30 · tools 18 · industry 12 · level 15 · education 7 · language 10 · contract 8
 """
@@ -10,12 +11,15 @@ import re
 X = lambda p: re.compile(p, re.I)
 TECH = [  # (pattern, points) – capped at 30
     (X(r"leistungselektronik|power electronic"), 8), (X(r"wechselrichter|inverter|umrichter|converter|dc[/-]dc"), 7),
-    (X(r"e-?antrieb|e-?drive|electric drive|elektrische antrieb|traktion|traction"), 7),
+    (X(r"e-?antrieb|e-?drive|electric drive|elektrische antrieb|traktion|traction|electric propulsion|"
+       r"elektrische[rn]? (flug)?antrieb|hybrid[- ]electric|propulsion (system|unit)|power processing"), 7),
     (X(r"e-?motor|elektromotor|elektrische maschine|electric machine|pmsm|permanent ?magnet"), 6),
     (X(r"regelungstechnik|control engineer|regelung|motor control|vector control|feldorientiert|\bfoc\b|"
        r"field[- ]weakening|mtpa|\bpll\b"), 6),
     (X(r"model[- ]based|modellbasiert|\bmbd\b|\bmil\b|\bsil\b|\bhil\b|hardware[- ]in[- ]the[- ]loop"), 6),
-    (X(r"on-?board charger|\bobc\b|ladetechnik|charging|ladesystem|v2g|bidirektional"), 5),
+    (X(r"on-?board charger|\bobc\b|ladetechnik|charging|ladesystem|v2g|bidirektional|"
+       r"grid[- ]?(connected|forming|integration|code)|netzanschluss|netzintegration|\bthd\b|"
+       r"photovolt|solar inverter|wind(energie)? ?(converter|umrichter)|energiespeicher|energy storage|\bbess\b"), 5),
     (X(r"funktionsentwicklung|function development|thermal|derating|simulation"), 3),
     (X(r"\bbms\b|batterie|battery|hochvolt|high[- ]voltage"), 3),
 ]
@@ -23,7 +27,9 @@ TOOLS = [(X(r"simulink"), 6), (X(r"\bmatlab\b"), 4), (X(r"simscape"), 3), (X(r"s
          (X(r"canoe|capl|vector"), 3), (X(r"\bpython\b"), 2), (X(r"motor-?cad|ansys|\bfem\b"), 2),
          (X(r"\bcan\b|can-bus"), 1)]
 INDUSTRY = X(r"automotive|fahrzeug|vehicle|e-?mobil|elektromobil|\bev\b|xev|nutzfahrzeug|truck|antriebsstrang|"
-             r"powertrain|ladeinfrastruktur|energie|energy|bahn|rail")
+             r"powertrain|ladeinfrastruktur|energie|energy|bahn|rail|aerospace|aviation|luftfahrt|aircraft|"
+             r"flugzeug|evtol|drohne|drone|\buav\b|raumfahrt|space|satellit|windenergie|wind turbine|"
+             r"photovolt|solar|renewable|erneuerbar|wasserstoff|hydrogen|fuel cell|brennstoffzelle|marine|schiff")
 JUNIOR = X(r"junior|absolvent|graduate|berufseinsteiger|einsteiger|trainee|young professional|"
            r"erste berufserfahrung|first experience|0[-–]2 jahre|bis zu 2 jahre")
 MID = X(r"(3|drei)\+? ?(jahre|years)|mehrjährige")
@@ -35,6 +41,8 @@ GERMAN_HIGH = X(r"verhandlungssicher|fließend\w* deutsch|deutsch\w* fließend|s
 ENGLISH_DOC = X(r"\b(the|and|you|your|we are|requirements|responsibilities)\b")
 AGENCY = X(r"arbeitnehmerüberlassung|personaldienstleist|zeitarbeit|für unseren kunden|for our client|"
            r"im auftrag unseres|brunel|ferchau|hays|akkodis|orizon|randstad|adecco|gulp|amadeus fire")
+DEFENCE = X(r"\bdefen[cs]e\b|verteidigung|rüstung|wehrtechni|military|militär|bundeswehr|nato\b|"
+            r"loitering munition|weapon|waffen")
 HARD_STOP = X(r"sicherheitsüberprüfung|security clearance|deutsche staatsangehörigkeit|german citizenship|"
               r"\bü2\b|\bü3\b")
 
@@ -73,6 +81,8 @@ def prescore(j):
         s += 4; flags.append("Agency")
     else:
         s += 8
+    if DEFENCE.search(text + " " + (j.get("companyName") or "")):
+        flags.append("defence")
     if HARD_STOP.search(text):
         s = 0; flags.append("HARD STOP: clearance/citizenship")
     if not desc:

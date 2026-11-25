@@ -63,7 +63,10 @@ TITLE_OUT = X(r"\b(senior|sr\.|lead|principal|head of|leiter|leitung|director|ma
 TITLE_ROLE = X(r"ingenieur|engineer|entwickl|developer|wissenschaftl|research|forsch|simulation|validier|"
                r"test|system|applikation|elektro|electrical|power|antrieb|drive|batter|hochvolt|embedded|"
                r"regelung|control|mechatron|mobil|absolvent|graduate|junior|doktorand|promotion|phd|"
-               r"funktion|function|hardware|software|e/e|powertrain|inverter|umrichter|motor")
+               r"funktion|function|hardware|software|e/e|powertrain|inverter|umrichter|motor|"
+               r"propulsion|avionik|avionics|aerospace|luftfahrt|raumfahrt|satellit|drohne|drone|\buav|evtol|"
+               r"energietechnik|energy system|grid|windenergie|photovolt|energiespeicher|energy storage|"
+               r"brennstoffzelle|fuel cell|wasserstoff|hydrogen")
 # Core profile terms (title or description must hit one).
 CORE = X(r"simulink|simscape|stateflow|\bmatlab\b|model[- ]based|modellbasiert|\bmbd\b|"
          r"\bhil\b|\bmil\b|\bsil\b|hardware[- ]in[- ]the[- ]loop|\bdspace\b|canoe|capl|vector|"
@@ -73,7 +76,15 @@ CORE = X(r"simulink|simscape|stateflow|\bmatlab\b|model[- ]based|modellbasiert|\
          r"control system|motor control|\bbms\b|battery|batterie|hochvolt|high[- ]voltage|ladetechnik|"
          r"charging|fahrzeugtechnik|nutzfahrzeug|elektromobil|e-mobility|powertrain|antriebsstrang|"
          r"elektrotechnik|electrical engineering|elektronik|electronics|embedded|mechatron|automatisierung|"
-         r"steuerungstechnik|energietechnik|antriebssystem|elektrifizierung|electrification")
+         r"steuerungstechnik|energietechnik|antriebssystem|elektrifizierung|electrification|"
+         # aerospace, drones, space, renewables, grid, storage, hydrogen, rail, marine (added 25 Nov 2026)
+         r"electric propulsion|elektrische[rn]? (flug)?antrieb|hybrid[- ]electric|evtol|\buav\b|\buas\b|"
+         r"drohne|drone|multicopter|aircraft electri|more electric aircraft|avionik|avionics|"
+         r"spacecraft|satellit|raumfahrt|space power|\bppu\b|power processing|"
+         r"wind(energie| turbine|kraft)|photovolt|\bpv\b|solar inverter|grid[- ]?(connected|forming|integration|code)|"
+         r"netzanschluss|netzintegration|stromnetz|\bhvdc\b|\bstatcom\b|energiespeicher|energy storage|\bbess\b|"
+         r"brennstoffzelle|fuel cell|elektrolyseur|electrolyzer|schienenfahrzeug|railway traction|"
+         r"elektrischer schiffsantrieb|marine propulsion")
 # Engineering titles that are kept even when the posting text is too short to show a profile term.
 ENG_TITLE = X(r"ingenieur|engineer|entwicklung|entwickler|wissenschaftliche|absolvent|graduate|trainee|"
               r"berufseinsteiger|junior")

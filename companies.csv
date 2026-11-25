@@ -1,4 +1,17 @@
 name,domain,type,ats,ats_id,careers_url,source,status,checked,tier
+Tytan Technologies,tytan-technologies.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Vaeridion,vaeridion.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Avilus,avilus.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Reflex Aerospace,reflexaerospace.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+OroraTech,ororatech.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Morpheus Space,morpheus.space,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Dcubed,dcubed.space,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+constellr,constellr.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+SpaceTech GmbH,spacetech-i.com,Startup / SME,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Maschinenfabrik Reinhausen,reinhausen.com,Industry,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Becker Marine Systems,becker-marine-systems.com,Industry,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Collins Aerospace Germany,collinsaerospace.com,Industry,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
+Safran Germany,safran-group.com,Industry,,,,Own list: aerospace/space/renewables 25 Nov 2026,active,,A
 Mercedes-Benz,mercedes-benz.com,Industry,beesite,https://jobs.api.mercedes-benz.com/search,https://jobs.mercedes-benz.com,seed: OEM; manual fix 9 Nov,active,2026-10-30,A
 BMW Group,bmwgroup.com,Industry,successfactors,career5.successfactors.eu,https://career5.successfactors.eu/career?company=bmwag&lang=de_DE&site=&loginFlowRequired=true,seed: OEM,active,2026-11-09,A
 Volkswagen,volkswagen-group.com,Industry,generic,,https://www.volkswagen-group.com/de/karriere-16057?set_locale=true,seed: OEM; duplicate (covered by group row),inactive,2026-11-09,A
@@ -20,9 +33,9 @@ DEUTZ,deutz.com,Industry,generic,,https://www.deutz.com/de/unternehmen/karriere/
 Jungheinrich,jungheinrich.com,Industry,generic,,https://www.jungheinrich.com/karriere/dein-jungheinrich-international-graduate-programme,seed: intralogistics,active,2026-11-09,A
 KION Group,kiongroup.com,Industry,workday,kiongroup|wd3|KIONGroup,https://www.kiongroup.com/en/,seed: intralogistics,active,2026-10-30,A
 Alstom Germany,alstom.com,Industry,successfactors,jobsearch.alstom.com,https://jobsearch.alstom.com/,seed: rail,active,2026-11-09,A
-Stadler,stadlerrail.com,Industry,generic,,https://www.stadlerrail.com/de/vulnerability-disclosure-programme-home,seed: rail,active,2026-11-09,A
+Stadler,stadlerrail.com,Industry,,,,seed: rail,active,,A
 Siemens Mobility,mobility.siemens.com,Industry,generic,,https://jobs.siemens.com/de_DE/externaljobs/SearchJobs/feed/?42389=%5B102122%5D&amp;42389_format=17549&amp;42394=22162546&amp;42394_format=17553&amp;listFilterMode=1&amp;folderRecordsPerPage=6&amp;,seed: rail,active,2026-11-09,A
-Knorr-Bremse,knorr-bremse.com,Industry,none,,,seed: tier1,active,2026-11-09,A
+Knorr-Bremse,knorr-bremse.com,Industry,,,,seed: tier1,active,,A
 Volocopter,volocopter.com,Industry,generic,,https://front.hibob.com/master-ca5a2f0db82396c349fbcfb3addf624abaeca12b/careers/styles.b9cc01d93284b67d.css,seed: e-aviation,active,2026-11-09,A
 Airbus,airbus.com,Industry,workday,ag|wd3|Airbus,https://www.airbus.com/en/careers,seed: aerospace,active,2026-10-30,A
 MTU Aero Engines,mtu.de,Industry,generic,,https://www.mtu.de/de/karriere/jobboerse/,seed: aerospace,active,2026-11-09,A
@@ -236,10 +249,10 @@ Anori Tech,anori.tech,Startup / SME,none,,,added 31 Oct (Claude target list),act
 eMoSys,emosys.de,Startup / SME,none,,,added 31 Oct (Claude target list),active,2026-11-09,A
 MONA Motors,mona.de,Startup / SME,none,,https://www.mona.de:443/katalog-bestellen,added 31 Oct (Claude target list),active,2026-11-09,A
 Bavarian Automotive Technologies,bavarian-automotive.com,Startup / SME,none,,,added 31 Oct (Claude target list),active,2026-11-09,A
-Rolls-Royce Power Systems,rolls-royce.com,Industry,none,,,added 31 Oct (Claude target list),active,2026-11-09,A
+Rolls-Royce Power Systems,rolls-royce.com,Industry,,,,added 31 Oct (Claude target list),active,,A
 Diehl,diehl.com,Industry,generic,,https://new.diehl.com/career/de/arbeiten-bei-diehl/mitarbeiterentwicklung-foerderung,added 31 Oct (Claude target list),active,2026-11-09,A
 HENSOLDT,hensoldt.net,Industry,generic,,https://jobs.hensoldt.net/?locale=de_DE,added 31 Oct (Claude target list),active,2026-11-09,A
-OHB System,ohb.de,Industry,generic,,https://www.ohb.de/karriere/karrieretag,added 31 Oct (Claude target list),active,2026-11-09,A
+OHB System,ohb.de,Industry,,,,added 31 Oct (Claude target list),active,,A
 Jenoptik,jenoptik.com,Industry,successfactors,careers.jenoptik.com,https://careers.jenoptik.com/?locale=en_US,added 31 Oct (Claude target list),active,2026-11-09,A
 Carl Zeiss,zeiss.de,Industry,generic,,https://www.zeiss.com/career/pt/home.html,added 31 Oct (Claude target list),active,2026-11-09,A
 Beckhoff Automation,beckhoff.com,Industry,generic,,https://www.beckhoff.com/en-gb/company/job-opportunities/,added 31 Oct (Claude target list),active,2026-11-09,A
@@ -261,7 +274,7 @@ SII Germany,sii-group.com,Industry,none,,,added 31 Oct (Claude target list),acti
 TKMS,tkmsgroup.com,Industry,none,,https://tkmsgroup.com/career/this-is-tkms/diversity-inclusion,added 31 Oct (Claude target list),active,2026-11-09,A
 K-tronik,k-tronik.de,Startup / SME,none,,https://k-tronik.de/karriere,added 31 Oct (Claude target list),active,2026-11-09,A
 KACO new energy,kaco-newenergy.com,Industry,personio,kaco-new-energy-gmbh,https://kaco-newenergy.com/career/job-offers,added 31 Oct (Claude target list),active,2026-10-31,A
-ENERCON,enercon.de,Industry,generic,,https://www.enercon.de/tr-tr/karriere/universite-ogrencileri,added 31 Oct (Claude target list),active,2026-11-09,A
+ENERCON,enercon.de,Industry,,,,added 31 Oct (Claude target list),active,,A
 Nordex,nordex-online.com,Industry,successfactors,jobs.nordex-online.com,https://jobs.nordex-online.com/?locale=en_US,added 31 Oct (Claude target list),active,2026-11-09,A
 Vestas Germany,vestas.com,Industry,successfactors,careers.vestas.com,https://careers.vestas.com/search/?q=&locationsearch=,added 31 Oct (Claude target list),active,2026-11-09,A
 Siemens Gamesa,siemensgamesa.com,Industry,generic,,https://jobs.siemens-energy.com/en_US/jobs/Jobs/siemens%20gamesa?listFilterMode=1&folderRecordsPerPage=20&,added 31 Oct (Claude target list),active,2026-11-09,A
@@ -445,7 +458,7 @@ Celluno,celluno.de,Industry,none,,,Own list (MASTER: Battery & BMS),active,2026-
 Batene,batene.de,Industry,none,,,Own list (MASTER: Battery & BMS),active,2026-11-09,A
 Circunomics,circunomics.com,Industry,personio,circunomics,https://www.circunomics.com/join-us,Own list (MASTER: Battery & BMS),active,2026-11-02,A
 Einhell (Battery),einhell.de,Industry,generic,,https://einhell.career.softgarden.de,Own list (MASTER: Battery & BMS),active,2026-11-09,A
-Lilium,lilium.com,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
+Lilium,lilium.com,Startup / SME,none,,,Own list (MASTER: EV Startups); closed (2nd insolvency Feb 2025),inactive,2026-11-09,A
 Quantron AG,quantron.net,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
 EVUM Motors,evum-motors.com,Startup / SME,generic,,https://evum-motors.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fevum-motors.com%2Fexplore%2Fkarriere%2F,Own list (MASTER: EV Startups),active,2026-11-09,A
 Holon,driveholon.com,Startup / SME,personio,holon-gmbh,https://www.driveholon.com/de/karriere/,Own list (MASTER: EV Startups),active,2026-11-02,A
@@ -460,8 +473,7 @@ Coboc,coboc.biz,Startup / SME,generic,,https://www.coboc.biz/en/career/,Own list
 ARX Robotics,arx-landsysteme.com,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
 Elektron Motors,elektron-motors.com,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
 eSystems MTG,esystemsmtg.com,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
-Torqeedo,torqeedo.com,Startup / SME,generic,,"https://www.rexx-systems.com
---",Own list (MASTER: EV Startups),active,2026-11-09,A
+Torqeedo,torqeedo.com,Startup / SME,,,,Own list (MASTER: EV Startups),active,,A
 kraftwerk TUBES,kraftwerk-tubes.com,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
 Advanced System Design,asd-munich.de,Startup / SME,none,,,Own list (MASTER: EV Startups),active,2026-11-09,A
 Kumpan Electric,kumpan-electric.com,Startup / SME,generic,,https://www.kumpan-electric.com/jobs/after-sales-manager/,Own list (MASTER: EV Startups),active,2026-11-09,A
@@ -575,7 +587,7 @@ Block Transformatoren,block.eu,Industry,generic,,https://www.block.eu/de_DE/karr
 Pulse Electronics Germany,pulseelectronics.com,Industry,generic,,https://yageogroup.com/de/karriere,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
 Rubycon Europe,rubycon.de,Industry,none,,,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
 GE Vernova Germany,gevernova.com,Industry,workday,gevernova|wd5|Vernova_ExternalSite,https://careers.gevernova.com/de/,"added 2 Nov (Claude, Germany-wide)",active,2026-11-02,A
-Kostal Solar Electric,kostal-solar-electric.com,Industry,none,,,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
+Kostal Solar Electric,kostal-solar-electric.com,Industry,,,,"added 2 Nov (Claude, Germany-wide)",active,,A
 SolarEdge e-Mobility (Germany),solaredge.com,Industry,none,,,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
 Fronius Deutschland,fronius.com,Industry,workday,fronius|wd3|Job_Board,https://www.fronius.com/de,"added 2 Nov (Claude, Germany-wide)",active,2026-11-02,A
 Enphase Germany,enphase.com,Industry,none,,,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
@@ -621,7 +633,7 @@ Aixtron,aixtron.com,Industry,generic,,https://aixtron.com/de/karriere/unsere-fac
 Heraeus,heraeus.com,Industry,successfactors,jobs.heraeus.com,https://jobs.heraeus.com/es,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
 H2FLY,h2fly.de,Industry,personio,h2fly-gmbh,https://www.h2fly.de/de/karriere,"added 2 Nov (Claude, Germany-wide)",active,2026-11-02,A
 Vertical Aerospace Germany,vertical-aerospace.com,Industry,ashby,vertical-aerospace,https://vertical-aerospace.com/careers/,"added 2 Nov (Claude, Germany-wide)",active,2026-11-02,A
-Quantum Systems,quantum-systems.com,Industry,none,,,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
+Quantum Systems,quantum-systems.com,Industry,,,,"added 2 Nov (Claude, Germany-wide)",active,,A
 Rocket Factory Augsburg,rfa.space,Industry,greenhouse,rocketfactoryaugsburgag,https://www.rfa.space/career/,"added 2 Nov (Claude, Germany-wide)",active,2026-11-02,A
 Liacon,liacon.de,Industry,none,,,"added 2 Nov (Claude, Germany-wide)",active,2026-11-09,A
 Kreisel Electric Germany,kreiselelectric.com,Industry,generic,,"https://www.rexx-systems.com
@@ -2866,7 +2878,7 @@ Wesernetz Bremen GmbH,wesernetz.de,Industry,generic,,https://www.wesernetz.de/fu
 Enervie Vernetzt,enervie-vernetzt.de,Industry,generic,,https://www.enervie-vernetzt.de/Home/Service/Baustellenfinder.aspx,DB: wikidata,active,2026-11-22,A
 E-Werk Netze,ew-netze.de,Industry,generic,,https://www.ew-netze.de/e-werk-netze-klaeren-zu-schreiben-des-wettbewerblichen-messstellenbetreibers-dmg-deutsche-messwesen,DB: wikidata,active,2026-11-22,A
 Jänecke+Schneemann Druckfarben,js-druckfarben.de,Industry,generic,,https://www.js-druckfarben.de/en/stellenanzeigen/praktikumsplatze-bei-j-s,DB: wikidata,active,2026-11-22,A
-Helsing,helsing.ai,Industry,none,,,DB: wikidata,active,2026-11-22,A
+Helsing,helsing.ai,Industry,,,,DB: wikidata,active,,A
 Institut für Arbeitsfähigkeit,arbeitsfaehig.com,University / research,generic,,https://www.arbeitsfaehig.com/de/jobs-23.html,DB: wikidata,active,2026-11-22,A
 Windel Group,windel-group.com,Industry,generic,,https://windel-candy.onapply.de/details/338847.html,DB: wikidata,active,2026-11-22,A
 Ergolutions GmbH,ergolutions.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
@@ -3610,9 +3622,9 @@ GIDAS,gidas.org,Industry,none,,,DB: wikidata,active,2026-11-22,A
 Glasfabrik Döhlen,glas-freital.com,Industry,none,,,DB: wikidata,active,2026-11-22,A
 Wafios,wafios.com,Industry,generic,,https://wafios.softgarden.io/widgets/jobs?config=eyJzaG93Sm9iTGlzdCI6eyJhdWRpZW5jZSI6ZmFsc2UsImpvYmNhdGVnb3J5Ijp0cnVlLCJQcm9qZWN0R2VvTG9jYXRpb25DaXR5IjpmYWxzZSwic2hvd0RhdGVJbkZyb250ZW5kIjpmYWxzZX0sInNob3dGaWx0ZXIiOnsiYXVkaWVuY2UiOmZhbHNlLCJqb2JjYXRlZ29yeSI6ZmFsc2UsIlByb2plY3RHZW9Mb2NhdGlvbkNpdHkiOmZhbHNlfSwicHJlZmlsbEZpbHRlciI6eyJhdWRpZW5jZSI6IjNhM2IxZjZlN2YwMDAwMDIwMTBhZDQ5MmU3ODM3ZGQ2Iiwiam9iY2F0ZWdvcnkiOiIiLCJQcm9qZWN0R2VvTG9jYXRpb25DaXR5IjoiIiwiUHJvamVjdEdlb0xvY2F0aW9uQ2l0eVJhZGl1cyI6IjI1In0sIm51bWJlck9mSm9icyI6MTB9,DB: wikidata,active,2026-11-22,A
 Infratest dimap,infratest-dimap.de,Industry,generic,,https://www.infratest-dimap.de/service/jobs/,DB: wikidata,active,2026-11-22,A
-TenneT TSO,tennet.eu,Industry,none,,,DB: wikidata,active,2026-11-22,A
+TenneT TSO,tennet.eu,Industry,,,,DB: wikidata,active,,A
 Ingenieure für Kommunikation,ifkom.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
-TransnetBW,transnetbw.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
+TransnetBW,transnetbw.de,Industry,,,,DB: wikidata,active,,A
 TELES AG Informationstechnologien,teles.com,Industry,none,,,DB: wikidata,active,2026-11-22,A
 Tesat-Spacecom,tesat.de,Industry,workday,ag|wd3|Airbus,https://tesat.de/,DB: wikidata,active,2026-11-22,A
 Kindermann GmbH,kindermann.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
@@ -4221,7 +4233,7 @@ ZEAG Energie,zeag-energie.de,Industry,generic,,https://www.zeag-energie.de/asset
 msg systems ag,msg.group,Industry,generic,,https://www.msg.group/de/karriere/einstiegsmoeglichkeiten/,DB: wikidata,active,2026-11-22,A
 ZhongDe Waste Technology,zhongde-ag.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
 VDO Automotive,vdo.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
-SMA Solar Technology,sma-italia.com,Industry,none,,,DB: wikidata,active,2026-11-22,A
+SMA Solar Technology,sma-italia.com,Industry,,,,DB: wikidata,active,,A
 Münnich Motorsport,muennich-motorsport.com,Industry,none,,,DB: wikidata,active,2026-11-22,A
 Strausberger Eisenbahn,strausberger-eisenbahn.de,Industry,generic,,https://www.stadtwerke-strausberg.de/messstellenbetrieb/,DB: wikidata,active,2026-11-22,A
 Anhaltisches Elektromotorenwerk Dessau,aemdessau.de,Industry,none,,,DB: wikidata,active,2026-11-22,A
@@ -6866,7 +6878,7 @@ Huober Brezel,huoberbrezel.de,Industry,none,,,DB: wikidata,active,2026-11-23,B
 allnatura,allnatura.de,Industry,personio,allnatura-vertriebs-gmbh-co-kg,https://www.allnatura.de/ueber-uns/karriere-bei-allnatura,DB: wikidata,active,2026-11-23,B
 Rügenwalder Spezialitäten Plüntsch,ruegenwalder-wurst.de,Industry,generic,,https://www.ruegenwalder-wurst.de/jobs/ausbildung/,DB: wikidata,active,2026-11-23,B
 Sport-Thieme,sport-thieme.de,Industry,none,,,DB: wikidata,active,2026-11-23,B
-Stark Defence,stark-defence.com,Industry,greenhouse,skdse,https://stark-defence.com/en/career,DB: wikidata,active,2026-11-23,B
+Stark Defence,stark-defence.com,Industry,greenhouse,skdse,https://stark-defence.com/en/career,DB: wikidata,active,2026-11-23,A
 DW-Shop,dw-shop.de,Industry,generic,,https://www.dw-shop.de/ueber-uns/offene-jobs,DB: wikidata,active,2026-11-23,B
 Schall Camping GmbH,schall-camping.de,Industry,generic,,https://schall-camping.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fschall-camping.de%2Fstellenangebote%2F,DB: wikidata,active,2026-11-23,B
 Aponeo,aponeo.de,Industry,none,,,DB: wikidata,active,2026-11-23,B
@@ -8594,11 +8606,11 @@ die Bayerische,diebayerische.de,Industry,generic,,https://www.diebayerische.de/3
 Bayerische Hypotheken- und Wechsel-Bank,hypo.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 Berenberg Verlag,berenberg-verlag.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 Berlin Hyp AG,berlinhyp.de,Industry,successfactors,karriere.lbbw.de,https://karriere.lbbw.de/,DB: wikidata,active,2026-11-24,B
-Premium Aerotec,premium-aerotec.com,Industry,none,,,DB: wikidata,active,2026-11-24,B
+Premium Aerotec,premium-aerotec.com,Industry,,,,DB: wikidata,active,,A
 Verlag Carl Ueberreuter,ueberreuter-sachbuch.at,Industry,generic,,https://www.ueberreuter.at/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ueberreuter.at%2Fhilfe-bestellen%2F&#038;format=xml,DB: wikidata,active,2026-11-24,B
 Dermapharm,dermapharm.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 Kiepenheuer & Witsch,kiwi-verlag.de,Industry,generic,,https://www.kiwi-verlag.de/verlag/jobs,DB: wikidata,active,2026-11-24,B
-Lange Aviation,lange-aviation.com,Industry,generic,,https://www.lange-aviation.com/karriere/,DB: wikidata,active,2026-11-24,B
+Lange Aviation,lange-aviation.com,Industry,generic,,https://www.lange-aviation.com/karriere/,DB: wikidata,active,2026-11-24,A
 Egmont Ehapa Media,egmont.de,Industry,generic,,https://egmont.csod.com/ATS/CareerSite/CareerSite.css?hsh=-1668080621,DB: wikidata,active,2026-11-24,B
 Franckh-Kosmos,kosmos.de,Industry,personio,franckh-kosmos-verlags-gmbh,https://www.kosmos.de/pages/unternehmen/mit-leidenschaft-kompetenz-teil-des-teams-werden,DB: wikidata,active,2026-11-24,B
 Ergo Lebensversicherung,ergo.de,Industry,generic,,https://careers.munichre.com/de/ergo-karriere-bei-ergo,DB: wikidata,active,2026-11-24,B
@@ -8989,7 +9001,7 @@ Dietrich Reimer Verlag,reimer-mann-verlag.de,Industry,none,,,DB: wikidata,active
 Verlag Ludwig Schulbuch,ludwig-schulbuch.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 Mitp Verlag,mitp.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 BuchVerlag für die Frau,buchverlag-fuer-die-frau.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
-ArianeGroup,ariane.group,Industry,workday,arianegroup|wd3|EXTERNALALL,https://www.ariane.group/,DB: wikidata,active,2026-11-24,B
+ArianeGroup,ariane.group,Industry,workday,arianegroup|wd3|EXTERNALALL,https://www.ariane.group/,DB: wikidata,active,2026-11-24,A
 Gesellschaft für Tropenornithologie,tropenornithologie.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 Wohnungsbaugenossenschaft „Aufbau“ Gera,die-aufbau.de,Industry,generic,,https://www.die-aufbau.de/jobs.php?id=64,DB: wikidata,active,2026-11-24,B
 BBU Verband Berlin-Brandenburgischer Wohnungsunternehmen,bbu.de,Industry,generic,,https://bbu.de/stellenportal?f%5B0%5D=j%3A11660,DB: wikidata,active,2026-11-24,B
@@ -9643,7 +9655,7 @@ VfL Pirna-Copitz,vfl-pirna-copitz.de,Industry,none,,,DB: wikidata,active,2026-11
 Wiesbaden Phantoms,wiesbaden-phantoms.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
 Drom Fragrances,drom.com,Industry,none,,,DB: wikidata,active,2026-11-24,B
 COFFRA,coffra.de,Industry,none,,,DB: wikidata,active,2026-11-24,B
-Atmos Space Cargo Gmbh,atmos-space-cargo.com,Industry,generic,,https://jobs.world.luccasoftware.com/atmos-space-cargo,DB: wikidata,active,2026-11-24,B
+Atmos Space Cargo Gmbh,atmos-space-cargo.com,Industry,generic,,https://jobs.world.luccasoftware.com/atmos-space-cargo,DB: wikidata,active,2026-11-24,A
 JUWEL Aquarium AG & Co. KG,juwel-aquarium.de,Industry,generic,,https://www.juwel-aquarium.de/en/company/Career,DB: wikidata,active,2026-11-24,B
 Kessel (Unternehmen),kessel.de,Industry,generic,,"https://www.rexx-systems.com
 --",DB: wikidata,active,2026-11-24,B
@@ -15312,7 +15324,7 @@ BUG-Unternehmensgruppe,bug-gruppe.de,Industry,,,,DB: wikidata,active,,B
 HomeToGo,hometogo.com,Industry,,,,DB: wikidata,active,,B
 Alphartis,alphartis.com,Industry,,,,DB: wikidata,active,,B
 Med 360°,med360grad.de,Industry,,,,DB: wikidata,active,,B
-Thyssenkrupp Nucera,thyssenkrupp-nucera.com,Industry,,,,DB: wikidata,active,,B
+Thyssenkrupp Nucera,thyssenkrupp-nucera.com,Industry,,,,DB: wikidata,active,,A
 Die PARTEI Hamburg,die-partei-hamburg.de,Industry,,,,DB: wikidata,active,,B
 BigRep,bigrep.com,Industry,,,,DB: wikidata,active,,B
 Domicil Senioren-Residenzen,domicil-seniorenresidenzen.de,Industry,,,,DB: wikidata,active,,B
@@ -15407,7 +15419,7 @@ Dibbern (Porzellan),dibbern.de,Industry,,,,DB: wikidata,active,,B
 Bundesliga-Gruppe GmbH,bundesliga-gruppe.de,Industry,,,,DB: wikidata,active,,B
 Die Nordsee,die-nordsee.de,Industry,,,,DB: wikidata,active,,B
 Dieckmann & Hansen,dieckmann-hansen.com,Industry,,,,DB: wikidata,active,,B
-Diehl Aircabin,diehl-aircabin.de,Industry,,,,DB: wikidata,active,,B
+Diehl Aircabin,diehl-aircabin.de,Industry,,,,DB: wikidata,active,,A
 DigiProtect,digiprotect.org,Industry,,,,DB: wikidata,active,,B
 Dilas Diodenlaser,dilas.com,Industry,,,,DB: wikidata,active,,B
 Max Schmidt Gebäudemanagement,maxschmidt.de,Industry,,,,DB: wikidata,active,,B
@@ -16082,7 +16094,7 @@ Jasba,jasba.de,Industry,,,,DB: wikidata,active,,B
 Roock Racing GmbH,roocksport.com,Industry,,,,DB: wikidata,active,,B
 STRABAG Property and Facility Services,strabag-pfs.de,Industry,,,,DB: wikidata,active,,B
 Jeans Fritz,jeans-fritz.de,Industry,,,,DB: wikidata,active,,B
-Jena-Optronik,jena-optronik.de,Industry,,,,DB: wikidata,active,,B
+Jena-Optronik,jena-optronik.de,Industry,,,,DB: wikidata,active,,A
 Jenaer Bäder,jenaer-baeder.de,Industry,,,,DB: wikidata,active,,B
 Wirtschaftsbetriebe der Stadt Norden,wirtschaftsbetriebe-norden.de,Industry,,,,DB: wikidata,active,,B
 Verkehrs-Gemeinschaft Landkreis Freudenstadt,vgf-info.de,Industry,,,,DB: wikidata,active,,B

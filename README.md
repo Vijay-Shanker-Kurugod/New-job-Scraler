@@ -1,6 +1,6 @@
 # job-crawler
 
-A free daily job crawler for an engineering job search in Germany: e-mobility, power electronics, e-drives, HiL/MBD, plus university and research posts.
+A free daily job crawler for an engineering job search in Germany: e-mobility, power electronics, e-drives, HiL/MBD, plus university and research posts. Since 25 Nov 2026 also aerospace (electric propulsion, eVTOL, drones, aircraft), space, renewables (wind, solar, grid, storage), hydrogen/fuel cells, rail and marine. Defence-related jobs get the pre-score flag `defence`.
 
 ## What runs
 | Workflow | When | What it does |

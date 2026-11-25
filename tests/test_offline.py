@@ -197,3 +197,20 @@ def test_jobspipe(monkeypatch):
     monkeypatch.setattr(J, "http", lambda *a, **k: R(body))
     out, st = J.crawl(log=lambda *a: None)
     assert [j["jobId"] for j in out] == ["jp-7"] and out[0]["source"] == "Indeed (via JobsPipe)"
+
+
+def test_new_industries_kept_and_scored():
+    """Aerospace, drones, space and renewables are in scope since 25 Nov 2026."""
+    from crawler.common import relevant
+    from crawler.score import prescore
+    cases = [
+        ("Electric Propulsion Engineer (m/w/d)", "Design of the electric propulsion unit for our eVTOL aircraft, motor control, inverter."),
+        ("Systemingenieur Drohnenantrieb", "Entwicklung elektrischer Antriebe für UAV, Simulink, Leistungselektronik."),
+        ("Power Systems Engineer Spacecraft", "Satellite power processing unit, DC/DC converter design, MATLAB."),
+        ("Ingenieur Netzintegration Windenergie", "Regelung von Umrichtern, Grid Code, Netzanschluss von Windenergieanlagen."),
+    ]
+    for t, d in cases:
+        assert relevant(t, d), t
+        assert prescore({"jobTitle": t, "jobDescription": d})["preScore"] >= 40, t
+    assert not relevant("Flugbegleiter (m/w/d)", "Betreuung unserer Gäste an Bord. " * 30)
+    assert "defence" in prescore({"jobTitle": "Engineer UAV", "jobDescription": "Defence drones for NATO"})["preFlags"]
